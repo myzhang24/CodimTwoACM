@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8" ?>  <!-- for emacs: -*- coding: utf-8 -*- -->
+<!-- Apache may like this line in the file .htaccess: AddCharset utf-8 .html -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1 plus MathML 2.0 plus SVG 1.1//EN"	 "http://www.w3.org/2002/04/xhtml-math-svg/xhtml-math-svg.dtd" >
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head><title>CodimTwoACM -- Codimension two ACM subvarieties of P^n</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link rel="stylesheet" type="text/css" href="/usr/share/Macaulay2/Style/doc.css"/>
+</head>
+<body>
+<table class="buttons">
+  <tr>
+    <td><div><a href="_castelnuovo.xhtml">next</a> | previous | <a href="_castelnuovo.xhtml">forward</a> | backward | up | top | <a href="master.xhtml">index</a> | <a href="toc.xhtml">toc</a> | <a href="http://www.math.uiuc.edu/Macaulay2/">Macaulay2 web site</a></div>
+
+    </td>
+  </tr>
+</table>
+<div><a href="index.html" title="Codimension two ACM subvarieties of P^n">CodimTwoACM</a> :: <a href="index.html" title="Codimension two ACM subvarieties of P^n">CodimTwoACM</a></div>
+<hr/>
+<div><h1>CodimTwoACM -- Codimension two ACM subvarieties of P^n</h1>
+<div class="single"><h2>Description</h2>
+<div><p>Let X be a be codimension two ACM subvariety of P^n.  Let R_X be the coordinate ring of X, its free resolution over the polynomial ring R is given by the Hilbert-Burch complex.</p>
+<p>This package generates codimension two ACM subvarieties of P^n of all possible formats. By format we mean the degrees of the forms in the Hilbert-Burch matrix, which is equivalently given by the graded Betti numbers of R_X.</p>
+<p>Since R_X has high depth, we may quotient by successive linear forms and reduce to points in P^2 without changing the Betti numbers.</p>
+<p>Let Z be a zero dimensional scheme of degree d in P^2.  The first numerical difference of the Hilbert function H(Z,n)-H(Z,n-1) is called a Castelnuovo function of degree d.</p>
+<p>The method <tt>castelnuovo(ZZ)</tt> (missing documentation<!-- tag: (castelnuovo,ZZ) -->) generates all Castelnuovo functions of a given degree.</p>
+<table class="examples"><tr><td><pre>i1 : L = castelnuovo 6
+
+o1 = {{1, 2, 2, 1}, {1, 2, 1, 1, 1}}
+
+o1 : List</pre>
+</td></tr>
+</table>
+<p>The method <tt>hilbertBurch(List)</tt> (missing documentation<!-- tag: (hilbertBurch,List) -->) generates all Hilbert-Burch degree matrices corresponding to a given Castelnuovo function.</p>
+<table class="examples"><tr><td><pre>i2 : D = hilbertBurch L#0
+
+o2 = {| 2 |, | 1 0 |}
+      | 3 |  | 2 1 |
+             | 3 2 |
+
+o2 : List</pre>
+</td></tr>
+</table>
+<p>The method <tt>random(Ring,Matrix)</tt> (missing documentation<!-- tag: (random,Ring,Matrix) -->) generates random forms according to the degrees specified by the Hilbert-Burch matrix.</p>
+<table class="examples"><tr><td><pre>i3 : R = ZZ/101[x_0..x_2]
+
+o3 = R
+
+o3 : PolynomialRing</pre>
+</td></tr>
+<tr><td><pre>i4 : S = ZZ/101[y_0..y_3]
+
+o4 = S
+
+o4 : PolynomialRing</pre>
+</td></tr>
+<tr><td><pre>i5 : M1 = random(R, last D)
+
+o5 = | 24x_0-36x_1-30x_2                                                     
+     | -29x_0^2+19x_0x_1-10x_1^2+19x_0x_2-29x_1x_2-8x_2^2                    
+     | -38x_0^3-16x_0^2x_1+21x_0x_1^2-47x_1^3+39x_0^2x_2+34x_0x_1x_2-39x_1^2x
+     ------------------------------------------------------------------------
+                                     
+                                     
+     _2+19x_0x_2^2-18x_1x_2^2-13x_2^3
+     ------------------------------------------------------------------------
+     0                                                  |
+     -22x_0-29x_1-24x_2                                 |
+     -43x_0^2-15x_0x_1-47x_1^2-28x_0x_2+38x_1x_2+2x_2^2 |
+
+             3       2
+o5 : Matrix R  &lt;--- R</pre>
+</td></tr>
+<tr><td><pre>i6 : M2 = random(S, last D)
+
+o6 = | 16y_0+22y_1+45y_2-34y_3                                              
+     | -48y_0^2-47y_0y_1-16y_1^2+47y_0y_2+7y_1y_2-23y_2^2+19y_0y_3+15y_1y_3+
+     | 35y_0^3+11y_0^2y_1+40y_0y_1^2+22y_1^3-38y_0^2y_2+11y_0y_1y_2-47y_1^2y
+     ------------------------------------------------------------------------
+                                                                            
+     39y_2y_3+43y_3^2                                                       
+     _2-28y_0y_2^2-7y_1y_2^2-47y_2^3+33y_0^2y_3+46y_0y_1y_3-23y_1^2y_3+y_0y_
+     ------------------------------------------------------------------------
+                                                                       
+                                                                       
+     2y_3+2y_1y_2y_3+15y_2^2y_3-3y_0y_3^2+29y_1y_3^2-37y_2y_3^2-13y_3^3
+     ------------------------------------------------------------------------
+     0                                                                       
+     -17y_0-11y_1+48y_2+36y_3                                                
+     -10y_0^2+30y_0y_1+27y_1^2-18y_0y_2-22y_1y_2-9y_2^2+39y_0y_3+32y_1y_3-32y
+     ------------------------------------------------------------------------
+                   |
+                   |
+     _2y_3-20y_3^2 |
+
+             3       2
+o6 : Matrix S  &lt;--- S</pre>
+</td></tr>
+</table>
+<p>The method <tt>minors(Matrix)</tt> (missing documentation<!-- tag: (minors,Matrix) -->) by default computes the ideal of the maximal minor, this way producing the ideal of a codimension two ACM subvariety of P^n.</p>
+<table class="examples"><tr><td><pre>i7 : I = minors M1 -- points in P^2
+
+                 2              2                        2       3      2    
+o7 = ideal (- 23x  - 5x x  + 34x  - 17x x  + 17x x  + 13x , - 22x  - 24x x  +
+                 0     0 1      1      0 2      1 2      2       0      0 1  
+     ------------------------------------------------------------------------
+          2      3      2                   2          2      3    4      3  
+     18x x  - 25x  + 12x x  + 47x x x  + 42x x  - 21x x  + 41x , 7x  - 18x x 
+        0 1      1      0 2      0 1 2      1 2      0 2      2    0      0 1
+     ------------------------------------------------------------------------
+         2 2        3      4      3        2            2        3       2 2
+     - 9x x  + 44x x  + 16x  + 42x x  + 15x x x  - 36x x x  + 37x x  - 3x x 
+         0 1      0 1      1      0 2      0 1 2      0 1 2      1 2     0 2
+     ------------------------------------------------------------------------
+              2      2 2        3        3      4
+     + 37x x x  + 18x x  + 28x x  + 41x x  - 25x )
+          0 1 2      1 2      0 2      1 2      2
+
+o7 : Ideal of R</pre>
+</td></tr>
+<tr><td><pre>i8 : J = minors M2 -- curve in P^3
+
+               2               2                       2                    
+o8 = ideal (31y  - 45y y  - 40y  + 3y y  - 45y y  + 39y  + 43y y  - 46y y  -
+               0      0 1      1     0 2      1 2      2      0 3      1 3  
+     ------------------------------------------------------------------------
+                 2     3      2          2      3      2                  2  
+     12y y  - 12y , 42y  - 43y y  - 19y y  - 12y  - 31y y  - 4y y y  + 24y y 
+        2 3      3     0      0 1      0 1      1      0 2     0 1 2      1 2
+     ------------------------------------------------------------------------
+            2        2    3      2                   2               
+     - 45y y  + 24y y  - y  - 46y y  + 47y y y  - 12y y  + 37y y y  -
+          0 2      1 2    2      0 3      0 1 3      1 3      0 2 3  
+     ------------------------------------------------------------------------
+                   2          2        2        2      3       4     3    
+     31y y y  - 23y y  - 30y y  - 13y y  - 14y y  - 27y , - 36y  + 6y y  -
+        1 2 3      2 3      0 3      1 3      2 3      3       0     0 1  
+     ------------------------------------------------------------------------
+        2 2        3      4      3        2          2        3        2 2  
+     28y y  - 26y y  + 12y  - 13y y  - 42y y y  + y y y  - 22y y  - 48y y  +
+        0 1      0 1      1      0 2      0 1 2    0 1 2      1 2      0 2  
+     ------------------------------------------------------------------------
+            2      2 2        3        3      4      3        2      
+     42y y y  + 33y y  + 31y y  - 41y y  + 39y  - 34y y  + 22y y y  +
+        0 1 2      1 2      0 2      1 2      2      0 3      0 1 3  
+     ------------------------------------------------------------------------
+          2        3        2                      2            2    
+     35y y y  - 41y y  + 14y y y  - 8y y y y  + 35y y y  - 39y y y  -
+        0 1 3      1 3      0 2 3     0 1 2 3      1 2 3      0 2 3  
+     ------------------------------------------------------------------------
+          2        3        2 2         2      2 2         2          2  
+     16y y y  + 44y y  + 32y y  + 5y y y  - 23y y  - 9y y y  + 33y y y  -
+        1 2 3      2 3      0 3     0 1 3      1 3     0 2 3      1 2 3  
+     ------------------------------------------------------------------------
+        2 2        3        3       3      4
+     40y y  - 28y y  - 10y y  + 2y y  + 12y )
+        2 3      0 3      1 3     2 3      3
+
+o8 : Ideal of S</pre>
+</td></tr>
+<tr><td><pre>i9 : betti res I
+
+            0 1 2
+o9 = total: 1 3 2
+         0: 1 . .
+         1: . 1 .
+         2: . 1 1
+         3: . 1 1
+
+o9 : BettiTally</pre>
+</td></tr>
+<tr><td><pre>i10 : betti res J
+
+             0 1 2
+o10 = total: 1 3 2
+          0: 1 . .
+          1: . 1 .
+          2: . 1 1
+          3: . 1 1
+
+o10 : BettiTally</pre>
+</td></tr>
+</table>
+</div>
+</div>
+<div class="single"><h2>Author</h2>
+<ul><li><div class="single"><a href="https://math.berkeley.edu/~myzhang/">Mengyuan Zhang</a><span> &lt;<a href="mailto:myzhang@berkeley.edu">myzhang@berkeley.edu</a>></span></div>
+</li>
+</ul>
+</div>
+<div class="single"><h2>Version</h2>
+This documentation describes version <b>1.0</b> of CodimTwoACM.</div>
+<div class="single"><h2>Source code</h2>
+The source code from which this documentation is derived is in the file <a href="../../../../Macaulay2/CodimTwoACM.m2">CodimTwoACM.m2</a>.</div>
+<div class="single"><h2>Exports</h2>
+<div class="exports"><ul><li><div class="single">Functions and commands<ul><li><span><tt>castelnuovo</tt> (missing documentation<!-- tag: castelnuovo -->)</span></li>
+<li><span><tt>hilbertBurch</tt> (missing documentation<!-- tag: hilbertBurch -->)</span></li>
+</ul>
+</div>
+</li>
+<li><div class="single">Symbols<ul><li><span><tt>Smooth</tt> (missing documentation<!-- tag: Smooth -->)</span></li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</body>
+</html>
+
